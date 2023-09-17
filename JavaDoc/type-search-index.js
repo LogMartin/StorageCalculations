@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.builder.database","l":"JDBCPostgreSQLConnect"},{"p":"com.builder.database","l":"Parts"},{"p":"com.builder.database","l":"Projects"},{"p":"com.builder.database","l":"SizeCategoryEnum"}];updateSearchResults();
