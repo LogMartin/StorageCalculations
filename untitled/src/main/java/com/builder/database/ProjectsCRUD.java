@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class ProjectsOperations implements DatabaseOperations{
+public class ProjectsCRUD implements DatabaseCRUD {
 
     static void create(Projects project) {
         try (Connection con = DBConnect.getConnection();) {
@@ -26,7 +26,7 @@ public class ProjectsOperations implements DatabaseOperations{
     static void update(Projects project){
         try (Connection con = DBConnect.getConnection();) {
             PreparedStatement ps = con.prepareStatement("UPDATE \"Parts\" SET volume=?, size=?, leadtime=? WHERE psp_num=\'" + project.getName() + "\'");
-            MaterialsOperations.update(project);
+            MaterialsCRUD.update(project);
         } catch (SQLException e){ e.printStackTrace(); }
     }
 
@@ -45,7 +45,7 @@ public class ProjectsOperations implements DatabaseOperations{
 
     static void read(Projects project){
         try (Connection con = DBConnect.getConnection();) {
-            MaterialsOperations.update(project);
+            MaterialsCRUD.update(project);
             PreparedStatement ps = con.prepareStatement("SELECT * FROM \"Projects\" WHERE project=\'"+project.getName()+"\'");
             ResultSet rs = ps.executeQuery();
             int i =0;
@@ -54,28 +54,13 @@ public class ProjectsOperations implements DatabaseOperations{
         } catch (SQLException e) {e.printStackTrace();}
     }
     static void delete(Projects project){
-        if (MaterialsOperations.exists(project)) {
-            MaterialsOperations.delete(project);
+        if (MaterialsCRUD.exists(project)) {
+            MaterialsCRUD.delete(project);
         }
         try (Connection con = DBConnect.getConnection();) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM \"Projects\" WHERE project=\'"+project.getName()+"\'");
             ps.executeUpdate();
         } catch (SQLException e) {e.printStackTrace();}
-    }
-
-
-
-    public static void main(String args[]){
-        Projects project = new Projects("TI-20",150);
-        for(int i=0; i<10; i++){
-            project.addMaterial("PSP12345"+Integer.toString(i),i);
-        }
-        create(project);
-        read(project);
-        update(project);
-        exists(project);
-        delete(project);
-
     }
 
 }

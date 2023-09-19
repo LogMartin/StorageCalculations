@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PartsOperations implements DatabaseOperations{
+public class PartsCRUD implements DatabaseCRUD {
 
 
     static void create(Parts part){

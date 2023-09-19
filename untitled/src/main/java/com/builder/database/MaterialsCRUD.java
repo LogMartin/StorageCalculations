@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class MaterialsOperations implements DatabaseOperations {
+public class MaterialsCRUD implements DatabaseCRUD {
 
     static void create(Projects project) {
         try (Connection con = DBConnect.getConnection();) {
@@ -23,8 +23,8 @@ public class MaterialsOperations implements DatabaseOperations {
 
 
     static void update(Projects project){
-        MaterialsOperations.delete(project);
-        MaterialsOperations.create(project);
+        MaterialsCRUD.delete(project);
+        MaterialsCRUD.create(project);
     }
     static boolean exists(Projects project){
         try (Connection con = DBConnect.getConnection();) {
